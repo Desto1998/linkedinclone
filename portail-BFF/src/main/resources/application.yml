@@ -1,0 +1,24 @@
+server:
+  port: 9090
+
+spring:
+  application:
+    name: API-GATEWAY
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: PROFILE-SERVICE
+          uri: http://localhost:9092
+          predicates:
+            - Path=/profile/**
+        - id: USER-SERVICE
+          uri: http://localhost:9093
+          predicates:
+            - Path=/user/**
+        - id: POST-SERVICE
+          uri: http://localhost:9091
+          predicates:
+            - Path=/post/**
